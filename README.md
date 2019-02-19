@@ -1,6 +1,5 @@
 # creditcard-codingchallenge
-Credit card processing coding challenge
-
+Credit card processing coding challenge 
 
 Imagine that you're writing software for a credit card provider.  Implement a
 program that will add new credit card accounts, process charges and credits

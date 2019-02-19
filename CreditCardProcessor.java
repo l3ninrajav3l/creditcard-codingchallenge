@@ -12,36 +12,39 @@ public class CreditCardProcessor {
     public static void main(String[] args) throws IOException {
 
         if (args.length > 0) {
-			String fileName = args[0];
+	    String fileName = args[0];
             System.out.println("File name : " + fileName);
             processCreditCards(fileName);
         } else {
             System.out.println(USAGE);
+	    System.exit(0);
         }
 
 
     }
 
     static void processCreditCards(String fileName) throws IOException {
+	    //read the file contents
         List<String> lines = Files.readAllLines(Paths.get(fileName))
                 .stream()
                 .filter(line -> !line.startsWith(LINE_SEP))
                 .collect(Collectors.toList());
 
-
+	   //setup the credit cards
         List<CreditCard> cards = lines.stream()
                 .filter(line -> line.startsWith(TxType.Add.name()))
                 .map(word -> word.split(WORDS_SEP))
                 .map(Transactions::setUpCreditCards)
                 .collect(Collectors.toList());
 
-
+	  // setup the transactions
         List<Transaction> transactions = lines.stream()
                 .filter(line -> !line.startsWith(TxType.Add.name()))
                 .map(words -> words.split(WORDS_SEP))
                 .map(Transactions::setUpTransactions)
                 .collect(Collectors.toList());
 
+	    //process each transaction and display the result
         List<CreditCard> txCards = transactions.stream()
                 .flatMap(tx -> cards.stream()
                         .filter(cc -> cc.getCardHolderName().equalsIgnoreCase(tx.getDoneBy()))

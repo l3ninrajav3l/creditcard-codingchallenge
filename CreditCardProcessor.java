@@ -58,7 +58,7 @@ public class CreditCardProcessor {
     private static final String WORDS_SEP = " ";
     public static final String USAGE = "[*] Please provide input file name \n" +
             "[*] Example \n" +
-            "[*] java CCP-APP I:\\cc.txt";
+            "[*] java CreditCardProcessor I:\\cc.txt";
 
 }
 

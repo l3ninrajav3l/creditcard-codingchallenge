@@ -49,7 +49,9 @@ public class CreditCardProcessor {
                 ).sorted()
                 .distinct().collect(Collectors.toList());
 
-        txCards.forEach(System.out::println);
+       System.out.println(LINE_SEP);
+       txCards.forEach(System.out::println);
+       System.out.println(LINE_SEP);
     }
 
     private static final String LINE_SEP = "```";

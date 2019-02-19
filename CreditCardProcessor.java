@@ -93,15 +93,15 @@ final class Transaction {
         return tx;
     }
 
-    public String getDoneBy() {
+    String getDoneBy() {
         return doneBy;
     }
 
-    public int getTxAmount() {
+    int getTxAmount() {
         return txAmount;
     }
 
-    public TxType getTxType() {
+    TxType getTxType() {
         return txType;
     }
 
@@ -171,7 +171,7 @@ final class CreditCard implements Comparable<CreditCard> {
         return balance;
     }
 
-    public String getBalanceSummary() {
+    String getBalanceSummary() {
         if (isLuhn10ValidCard(cardNumber)) {
             balanceSummary = "$" + balance;
         } else {

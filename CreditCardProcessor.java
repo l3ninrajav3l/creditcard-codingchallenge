@@ -19,11 +19,10 @@ public class CreditCardProcessor {
             System.out.println(USAGE);
 	    System.exit(0);
         }
-
-
     }
 
     static void processCreditCards(String fileName) throws IOException {
+
 	    //read the file contents
         List<String> lines = Files.readAllLines(Paths.get(fileName))
                 .stream()
@@ -67,9 +66,7 @@ public class CreditCardProcessor {
 
 final class Transactions {
 
-    private Transactions() {
-
-    }
+    private Transactions() { }
 
     static CreditCard setUpCreditCards(String[] fromString) {
         final CreditCard cc = CreditCard.of(fromString);
@@ -137,25 +134,22 @@ final class CreditCard implements Comparable<CreditCard> {
     }
 
     CreditCard processTransaction(TxType txType, int txAmount) {
-        if (txType == TxType.Charge) {
-            if (isLuhn10ValidCard(cardNumber) && (balance + txAmount < txLimit))
-                balance += txAmount;
-        } else if (txType == TxType.Credit) {
-            if (isLuhn10ValidCard(cardNumber))
-                balance -= txAmount;
-        }
+
+        if (isLuhn10ValidCard(cardNumber)) {
+            if (txType == TxType.Charge) {
+                if ((balance + txAmount < txLimit))
+                    balance += txAmount;
+            } else if (txType == TxType.Credit) {
+                    balance -= txAmount;
+            }
+        } 
+             
         return this;
     }
 
     static CreditCard of(String[] cardValues) {
         final CreditCard creditCard = new CreditCard(cardValues[1], cardValues[2], Integer.parseInt(cardValues[3].substring(1)));
         return creditCard;
-    }
-
-    CreditCard credit(int creditAmount) {
-        if (isLuhn10ValidCard(cardNumber))
-            balance -= creditAmount;
-        return this;
     }
 
     String getCardHolderName() {
